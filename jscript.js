@@ -44,8 +44,8 @@ function singleRound () {
     let computerSelection = getComputerChoice();
     let playerSelection = getPlayerChoice();
 
-    console.log(computerSelection);
-    console.log(playerSelection);
+    console.log("Computer: " +computerSelection);
+    console.log("Spieler: " +playerSelection);
 
    if (playerSelection === computerSelection) {
         return "Unentschieden";
@@ -75,12 +75,49 @@ function singleRound () {
     return "Punkt fuer den Spieler!"
 }
 
+
 }
 
 function game(){
-    for (let i = 0; i < 5; i++) {
-    console.log(singleRound());
- }
+    let computerPoints = 0;
+    let playerPoints = 0;
+
+    for (let i = 0; i < 5; i++) 
+    {
+        var result = singleRound ()
+        if (result == "Unentschieden") {
+            console.log("Punktestand Spieler: " + playerPoints);
+            console.log("Punktestand Computer: " + computerPoints);
+        }
+    
+        else if (result == "Punkt fuer den Spieler!") {
+            playerPoints++;
+            console.log("Punktestand Spieler: " + playerPoints);
+            console.log("Punktestand Computer: " + computerPoints);
+    
+        }
+    
+        else if (result == "Punkt fuer den Computer!") {
+            computerPoints++;
+            console.log("Punktestand Spieler: " + playerPoints);
+            console.log("Punktestand Computer: " + computerPoints);
+        }
+
+    
+    
+    }
+
+    if (playerPoints == computerPoints) {
+        console.log("Unentschieden!")
+    }
+
+    else if (playerPoints < computerPoints) {
+        console.log("Spieler gewinnt!")
+    }
+
+    else {
+        console.log("Computer gewinnt!")
+    }
 }
 
 
