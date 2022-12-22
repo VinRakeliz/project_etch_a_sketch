@@ -1,4 +1,5 @@
 
+
 function capitalizeFirstLetter(string) 
 {
   return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -23,56 +24,75 @@ function getComputerChoice () {
     
 }
 
-function getPlayerChoice () {
-    var playerSelection = capitalizeFirstLetter(prompt("Rock, Paper or Scissors? Please enter your choice:"));
-    while (playerSelection != "Rock" && playerSelection != "Scissors" && playerSelection != "Paper") {
-    var playerSelection = capitalizeFirstLetter(prompt("Error, please enter a valid choice:"));
-    }
+//function getPlayerChoice () {
+//    var playerSelection = capitalizeFirstLetter(prompt("Rock, Paper or Scissors? Please enter your choice:"));
+//    while (playerSelection != "Rock" && playerSelection != "Scissors" && playerSelection != "Paper") {
+//    var playerSelection = capitalizeFirstLetter(prompt("Error, please enter a valid choice:"));
+//    }
 
-    return playerSelection;
+//    return playerSelection;
 
     
-}
+//}
 
-function playRound () {
-    for (let i = 0; i < 5; i++) {
-        singleRound ()
-     }
-}
+//function playRound () {
+//    for (let i = 0; i < 5; i++) {
+//        singleRound ()
+//     }
+//}
 
-function singleRound () {
+function playRound (prompt) {
     let computerSelection = getComputerChoice();
-    let playerSelection = getPlayerChoice();
+    let playerSelection = prompt;
+    
 
-    console.log("Computer: " +computerSelection);
-    console.log("Spieler: " +playerSelection);
+    playerChoice.innerHTML = playerSelection;
+    computerChoice.innerHTML = computerSelection;
 
    if (playerSelection === computerSelection) {
-        return "Unentschieden";
+        return playRoundResult.innerHTML = "Unentschieden";
    }
 
    else if  (playerSelection === "Paper" && computerSelection === "Rock") {
-        return "Punkt fuer den Spieler!"
+        increasePlayerScore();
+        checkScore();
+        return playRoundResult.innerHTML = "Punkt fuer den Spieler!"
+        
     }
 
     else if  (playerSelection === "Paper" && computerSelection === "Scissors") {
-        return "Punkt fuer den Computer!"
+        increaseComputerScore();
+        checkScore();
+        return playRoundResult.innerHTML = "Punkt fuer den Computer!"
+
+
     }
 
     else if  (playerSelection === "Scissors" && computerSelection === "Rock") {
-        return "Punkt fuer den Computer!"
+        increaseComputerScore();
+        checkScore();
+        return playRoundResult.innerHTML = "Punkt fuer den Computer!"
+        
+
     }
 
    else if  (playerSelection === "Scissors" && computerSelection === "Paper") {
-         return "Punkt fuer den Spieler!"
+        increasePlayerScore();
+        checkScore();
+        return playRoundResult.innerHTML = "Punkt fuer den Spieler!"
     }
 
     else if  (playerSelection === "Rock" && computerSelection === "Paper") {
-        return "Punkt fuer den Computer!"
+        increaseComputerScore();
+        checkScore();
+        return playRoundResult.innerHTML = "Punkt fuer den Computer!"
+
    }
 
    else if  (playerSelection === "Rock" && computerSelection === "Scissors") {
-    return "Punkt fuer den Spieler!"
+        increasePlayerScore();
+        checkScore();
+        return playRoundResult.innerHTML = "Punkt fuer den Spieler!"
 }
 
 
@@ -120,5 +140,47 @@ function game(){
     }
 }
 
+function increasePlayerScore(){
+playerScore ++;
+document.getElementById("playerScore").textContent ++ ;
+}
 
-console.log(game())
+function increaseComputerScore(){
+computerScore ++;
+document.getElementById("computerScore").textContent ++ ;
+}
+
+const rockButton = document.getElementById("rockButton");
+const paperButton = document.getElementById("paperButton");
+const scissorsButton = document.getElementById("scissorsButton");
+
+rockButton.addEventListener("click", function () {playRound("Rock")});
+paperButton.addEventListener("click", function () {playRound("Paper")});
+scissorsButton.addEventListener("click", function () {playRound("Scissors")});
+
+const playerChoice = document.getElementById("playerChoice");
+const computerChoice = document.getElementById("computerChoice");
+const playRoundResult = document.getElementById("playRoundResult");
+var playerScore = document.getElementById("playerScore").textContent;
+var computerScore = document.getElementById("computerScore").textContent;
+
+function checkScore(){
+    if (playerScore >= 5){
+        alert("Spieler gewinnt")
+        playerScore = 0;
+        computerScore = 0;
+        document.getElementById("playerScore").textContent = 0 ;
+        document.getElementById("computerScore").textContent = 0 ;
+    }
+    else if (computerScore >= 5){
+        alert("Computer gewinnt")  
+        playerScore = 0;
+        computerScore = 0;
+        document.getElementById("playerScore").textContent = 0 ;
+        document.getElementById("computerScore").textContent = 0 ;}
+    
+}
+
+
+
+
